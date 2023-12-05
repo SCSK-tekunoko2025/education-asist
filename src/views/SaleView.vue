@@ -1,35 +1,73 @@
 <template>
-<form>
-<div class="Form">
-  <div class="Form-Item">
-    <p class="Form-Item-Label">名前</p>
-    <input type="text" class="Form-Item-Input" placeholder="例）山田太郎">
-  </div>
-  <div class="Form-Item">
-    <p class="Form-Item-Label">住所</p>
-    <input type="text" class="Form-Item-Input" placeholder="">
-  </div>
-  <div class="Form-Item">
-    <p class="Form-Item-Label">商品名</p>
-    <input type="item-name" class="Form-Item-Input" placeholder="">
-  </div>
-  <div class="Form-Item">
-    <p class="Form-Item-Label isMsg">商品説明</p>
-    <textarea class="Form-Item-Textarea"></textarea>
-  </div>
-  <input type="submit" class="Form-Btn" value="送信する">
-</div>
-</form>
-  <!-- <form method="post" name="buy-form">
+  <div id="app">
+    <div class="preview_zone">
+      <img :src="url" alt="ここにプレビューが表示されます">
+    </div>
+    <div class="upload_zone">
+      <input type="file" class="input_file" ref="preview" @change="previewImage">
+      <div class="drop_zone">
+        ここにファイルをドラッグ＆ドロップ
+      </div>
+    </div>
 
-      名前：<input type="text" name="saler_name" placeholder="名前">
-      商品状態：<input type="text" name="status" placeholder="商品状態">
-      商品価格：<input type="text" placeholder="商品価格">
-      説明：<textarea name="message" placeholder="商品ついてご記入ください"></textarea>
-  </form> -->
+    <div class="container">
+      <form method="post">
+        <div class="Form">
+          <div class="Form-Item">
+            <p class="Form-Item-Label">名前</p>
+            <input type="text" class="Form-Item-Input" placeholder="例）山田太郎">
+          </div>
+          <div class="Form-Item">
+            <p class="Form-Item-Label">住所</p>
+            <input type="text" class="Form-Item-Input" placeholder="">
+          </div>
+          <div class="Form-Item">
+            <p class="Form-Item-Label">商品名</p>
+            <input type="text" class="Form-Item-Input" placeholder="">
+          </div>
+          <div class="Form-Item">
+            <p class="Form-Item-Label isMsg">商品説明</p>
+            <textarea class="Form-Item-Textarea"></textarea>
+          </div>
+          <input type="submit" class="Form-Btn" value="送信する">
+        </div>
+      </form>
+    </div>
+  </div>
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      url: '',
+    };
+  },
+  methods: {
+    previewImage() {
+      let image = this.$refs.preview.files[0];
+      this.url = URL.createObjectURL(image);
+    }
+  }
+}
+</script>
+
+
+
+
 <style scoped>
+
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #app {
+        display: flex;
+        align-items: center;
+    }
+
 .container {
   max-width:600px;
   margin:0 auto;
@@ -38,6 +76,29 @@
   -moz-border-radius:6px;
   border-radius:6px;
   background-color:#FAFAFA;
+}
+    .drop_zone {
+        border: 3px solid lightgray;
+        border-radius: 20px;
+        width: 300px;
+        height: 150px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: lightgray;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+
+    .preview_zone {
+        border: 2px solid black;
+        width: 400px;
+        height: 500px;
+        margin-right: 20px;
+    }
+
+product-info{
+    background-color:black;
 }
 
 
