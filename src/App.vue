@@ -1,6 +1,11 @@
 <template>
+  <header>
+    <h1>Education</h1>
+  </header>  
   <nav>
-    <router-link to="/">Home</router-link> 
+    <router-link to="/">Home</router-link>| 
+    <router-link to="/Sale">Sale</router-link>| 
+    <router-link to="/about">about</router-link> 
   </nav>
   <router-view/>
 </template>
