@@ -77,9 +77,7 @@ export default {
     goToCheckout() {
       this.$router.push({
         name: "checkout",
-        params: {
-          productId: this.id,
-        },
+        params: { productId: this.id },
         query: {
           productTitle: this.title,
           productPrice: this.price,

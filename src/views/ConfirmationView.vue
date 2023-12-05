@@ -6,6 +6,9 @@
     </div>
     <div class="order-details">
       <h2>取引情報</h2>
+      <div class="image-and-info">
+        
+      </div>
       <div class="product-image">
         <!-- <img :src="productImageUrl" alt="Product Image"> -->
         <img
@@ -14,6 +17,7 @@
           class="product-image"
         />
       </div>
+
       <div class="product-info">
         <h3>{{ productTitle }}</h3>
         <p>商品ポイント: {{ productPrice }}pt</p>
@@ -26,6 +30,7 @@
           住所: <span>〒123-4567 東京都〇〇区〇〇坂1-2-3</span>
         </address>
       </div>
+
     </div>
     <button class="goToHome-btn" @click="goToHome">Homeに戻る</button>
   </div>

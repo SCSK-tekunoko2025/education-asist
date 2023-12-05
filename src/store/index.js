@@ -1,18 +1,3 @@
-// import { createStore } from 'vuex'
-
-// export default createStore({
-//   state: {
-//   },
-//   getters: {
-//   },
-//   mutations: {
-//   },
-//   actions: {
-//   },
-//   modules: {
-//   }
-// })
-
 import { createStore } from 'vuex'
 import { VuexPersistence } from 'vuex-persist'
 
@@ -22,42 +7,38 @@ const vuexPersist = new VuexPersistence({
 
 export default createStore({
   state: {
+    point: 500, // 初期ポイント
     count: 0, // indexの管理
-    memos: [] // dataを保存
+    items: [] // dataを保存
   },
   getters: {
     getCount: (state) => {
-      return state.memos.length
+      return state.items.length
     },
     getAll: (state) => {
-      return state.memos
+      return state.items
     },
     getMemoById: (state) => (id) => {
-      return state.memos.find(memo => memo.id === id)
+      return state.items.find(item => item.id === id)
     }
   },
   mutations: {
     RESTORE_MUTATION: vuexPersist.RESTORE_MUTATION,
     /* メモを保存する */
-    save (state, newMemo) {
-      newMemo.id = ++state.count
-      state.memos.unshift(newMemo)
-      /*
-      if (newMemo.id) {
-        let x = state.memos.find(memo => memo.id === newMemo.id)
-        x.title = newMemo.title
-        x.content = newMemo.content
-      } else {
-        newMemo.id = ++state.count
-        state.memos.unshift(newMemo)
-      }
-      */
+    save (state, newitem) {
+      newitem.id = ++state.count
+      state.items.unshift(newitem)
     },
     delete (state, id) {
-      state.memos = state.memos.filter(memo => memo.id !== id)
+      const numericId = parseInt(id, 10);
+      console.log(numericId);
+      state.items = state.items.filter(item => item.id !== numericId);
     }
   },
   actions: {
+    deleteItem({ commit }, productId) {
+      commit('delete', productId);
+    },
   },
   modules: {
   },

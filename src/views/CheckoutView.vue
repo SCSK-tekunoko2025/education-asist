@@ -31,13 +31,13 @@
     <div class="purchase-confirmed">
       <div class="final-confirmation">
         <ul>
-          <li><span class="font-bold">商品ポイント：</span>{{ productPrice }}</li>
-          <li><span class="font-bold">決済手数ポイント：</span>{{ fees }}</li>
+          <li><span class="font-bold">商品ポイント：</span>{{ productPrice }}pt</li>
+          <li><span class="font-bold">決済手数ポイント：</span>{{ fees }}pt</li>
         </ul>
 
         <hr />
         <ul>
-          <li><span class="font-bold">支払ポイント：</span>{{ totalPrice }}</li>
+          <li><span class="font-bold">支払ポイント：</span>{{ totalPrice }}pt</li>
         </ul>
       </div>
     </div>
@@ -71,8 +71,11 @@ export default {
     this.productImageUrl = this.$route.query.productImageUrl; // URLクエリから画像のURLを取得
   },
   methods: {
-    // 購入確認画面に遷移するメソッド
     goToConfirmation() {
+      // Vuexストアのアクションを呼び出して商品を削除
+      this.$store.dispatch("deleteItem", this.productId);
+      
+      // 購入確認画面に遷移
       this.$router.push({
         name: "confirmation",
         params: {
@@ -87,7 +90,6 @@ export default {
     },
   },
 };
-
 </script>
 
 <style scoped>
