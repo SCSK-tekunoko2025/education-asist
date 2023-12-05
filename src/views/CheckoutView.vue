@@ -1,15 +1,4 @@
 <template>
-  <div class="search-container">
-    <!-- プルダウンで商品のカテゴリを選択できるようにする -->
-    <select class="search-input">
-      <option value="すべて">すべて</option>
-      <option value="衣服">衣服</option>
-      <option value="部活用品">部活用品</option>
-    </select>
-    <input type="text" class="search-input" placeholder="検索..." />
-    <button class="search-button">検索</button>
-  </div>
-
   <div class="container">
     <div class="checkout-page">
       <h2>購入の確認</h2>
@@ -42,24 +31,25 @@
     <div class="purchase-confirmed">
       <div class="final-confirmation">
         <ul>
-          <li>商品ポイント</li>
-          <li>決済手数ポイント</li>
+          <li><span class="font-bold">商品ポイント：</span>{{ productPrice }}</li>
+          <li><span class="font-bold">決済手数ポイント：</span>{{ fees }}</li>
         </ul>
 
         <hr />
         <ul>
-          <li>支払ポイント</li>
+          <li><span class="font-bold">支払ポイント：</span>{{ totalPrice }}</li>
         </ul>
       </div>
     </div>
   </div>
   <div class="button-container">
-    <button class="button">購入する</button>
+    <button class="button" @click="goToConfirmation">購入する</button>
   </div>
 </template>
 
 <script>
 export default {
+  name: "CheckoutView",
   data() {
     return {
       productId: null,
@@ -80,35 +70,27 @@ export default {
     this.productPrice = parseInt(this.$route.query.productPrice, 10);
     this.productImageUrl = this.$route.query.productImageUrl; // URLクエリから画像のURLを取得
   },
+  methods: {
+    // 購入確認画面に遷移するメソッド
+    goToConfirmation() {
+      this.$router.push({
+        name: "confirmation",
+        params: {
+          productId: this.productId,
+        },
+        query: {
+          productTitle: this.productTitle,
+          productPrice: this.productPrice,
+          productImageUrl: this.productImageUrl,
+        },
+      });
+    },
+  },
 };
+
 </script>
 
 <style scoped>
-
-.search-container {
-  display: flex; /* Flexboxを有効化 */
-  width: 50%; /* 幅を設定 */
-  margin: 0 auto; /* コンテナを中央に配置 */
-  margin-top: 50px; /* 上側に20pxの余白を設ける */
-  margin-bottom: 50px; /* 下側に20pxの余白を設ける */
-}
-
-.search-input {
-  flex-grow: 1; /* 入力欄が容器の残りスペースをすべて使用するようにする */
-  border: 1px solid #ccc; /* 枠線を設定 */
-  padding: 10px; /* パディングを設定 */
-  font-size: 16px; /* フォントサイズを設定 */
-}
-
-.search-button {
-  padding: 10px 20px; /* パディングを設定 */
-  border: none; /* 枠線をなくす */
-  background-color: #007bff; /* 背景色を設定 */
-  color: white; /* 文字色を白にする */
-  cursor: pointer; /* カーソルをポインターにする */
-  border-left: 1px solid #ccc; /* 左側に枠線を設定することで入力欄との区切りを明確にする */
-}
-
 button {
   float: left;
 }

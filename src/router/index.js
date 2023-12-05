@@ -1,29 +1,35 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import SaleView from '../views/SaleView.vue'
-import BuyView from '../views/BuyView.vue'
 import CheckoutView from '../views/CheckoutView.vue'
+import ConfirmationView from '../views/ConfirmationView.vue'
+import ItemsView from '../views/ItemsView.vue'
+import SaleView from '../views/SaleView.vue'
 
 const routes = [
   {
     path: '/',
-    name: 'home',
+    name: 'home/',
     component: HomeView
   },
   {
-    path: '/sale',
-    name: 'sale',
-    component: SaleView
-  },
-  {
-    path: '/buy',
-    name: 'buy',
-    component: BuyView
+    path: '/items/:productId',
+    name: 'items',
+    component: ItemsView
   },
   {
     path: '/checkout/:productId',
     name: 'checkout',
     component: CheckoutView
+  },
+  {
+    path: '/confirmation',
+    name: 'confirmation',
+    component: ConfirmationView
+  },
+  {
+    path: '/sale',
+    name: 'sale',
+    component: SaleView
   }
 ]
 
